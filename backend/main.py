@@ -12,7 +12,7 @@ app = FastAPI(
 
 
 # Preferred: get allowed origin from environment so you don't hardcode it
-FRONTEND_ORIGIN = os.environ.get("FRONTEND_URL", "https://key-generation-4mpb.vercel.app")
+FRONTEND_ORIGIN = os.environ.get("FRONTEND_URL", "https://key-generation-4umn.vercel.app")
 
 # If you have multiple frontends, use a list:
 origins = [FRONTEND_ORIGIN]
