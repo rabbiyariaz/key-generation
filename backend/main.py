@@ -8,14 +8,25 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS middleware for React frontend
+
+
+# Preferred: get allowed origin from environment so you don't hardcode it
+FRONTEND_ORIGIN = os.environ.get("FRONTEND_URL", "https://key-generation-4mpb.vercel.app")
+
+# If you have multiple frontends, use a list:
+origins = [FRONTEND_ORIGIN]
+
+# For quick testing you can temporarily allow all origins:
+# origins = ["*"]   # <-- use only for debugging, not production
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5174", "http://localhost:3000"],
+    allow_origins=origins,           # or ["*"] for debug
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Include routers
 app.include_router(cfg.router, prefix="/api/cfg", tags=["CFG"])
