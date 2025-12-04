@@ -20,12 +20,12 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --upgrade pip setuptools wheel maturin
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy application code from the current context (backend/) into /app
-COPY . /app
+# Copy application code into a backend package folder so 'backend' is importable
+COPY . /app/backend
 
 # Set env and expose port Railway will map
 ENV PORT=8080
 EXPOSE 8080
 
-# Start Uvicorn (assumes FastAPI app is `app` in main.py)
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Start Uvicorn using package path (assumes backend/main.py defines app = FastAPI())
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8080"]
