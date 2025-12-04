@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.routers import cfg, entropy, aes
+import os
 
 app = FastAPI(
     title="Cryptographic Key Generation API",
