@@ -9,16 +9,22 @@ app = FastAPI(
     version="1.0.0"
 )
 
+origins = [
+    "https://key-generation-4umn.vercel.app",
+    "http://localhost:5173",   # keep for local dev if you use Vite
+]
+
+
 
 
 # Preferred: get allowed origin from environment so you don't hardcode it
-FRONTEND_ORIGIN = os.environ.get("FRONTEND_URL", "https://key-generation-4umn.vercel.app")
+# FRONTEND_ORIGIN = os.environ.get("FRONTEND_URL", "https://key-generation-4umn.vercel.app")
 
-# If you have multiple frontends, use a list:
-origins = [FRONTEND_ORIGIN]
+# # If you have multiple frontends, use a list:
+# origins = [FRONTEND_ORIGIN]
 
-# For quick testing you can temporarily allow all origins:
-# origins = ["*"]   # <-- use only for debugging, not production
+# # For quick testing you can temporarily allow all origins:
+# # origins = ["*"]   # <-- use only for debugging, not production
 
 app.add_middleware(
     CORSMiddleware,
