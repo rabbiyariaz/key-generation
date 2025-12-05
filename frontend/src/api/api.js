@@ -1,18 +1,20 @@
 // src/api/index.js (or wherever)
 import axios from 'axios'
 
-// Use Vite env variable in production; fall back to local relative path for dev
-const API_BASE = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api`
-  : '/api';
+const raw = import.meta.env.VITE_API_URL ?? '';
+const cleanBase = raw.replace(/\/+$/, ''); // remove trailing slash(es)
+const API_PREFIX = '/api';
+const API_BASE = cleanBase
+  ? (cleanBase.endsWith(API_PREFIX) ? cleanBase : cleanBase + API_PREFIX)
+  : API_PREFIX;
+
 
 
 const api = axios.create({
-  baseURL: API_BASE, // <- fixed here
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: API_BASE,
+  headers: { 'Content-Type': 'application/json' },
 })
+
 
 export const cfgApi = {
   getModes: async () => {
