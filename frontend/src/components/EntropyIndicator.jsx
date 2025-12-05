@@ -31,8 +31,8 @@ function EntropyIndicator({ text, onEntropyCalculated }) {
   }
 
   const getBarColor = (ratio) => {
-    if (ratio < 0.4) return 'bg-red-500'
-    if (ratio < 0.7) return 'bg-yellow-500'
+    if (ratio < 0.2) return 'bg-red-500'
+    if (ratio < 0.5) return 'bg-yellow-500'
     return 'bg-green-500'
   }
 
