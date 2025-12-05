@@ -28,11 +28,13 @@ def get_entropy_color(entropy: float, max_entropy: float = 8.0) -> str:
     Returns: color name for TailwindCSS
     """
     if max_entropy == 0:
-        return "yellow"
+        return "red"
     
     ratio = entropy / max_entropy
     
-    if ratio < 0.5:
+    if ratio < 0.2:
+        return "red"
+    elif ratio < 0.5:
         return "yellow"
     else:
         return "green"
