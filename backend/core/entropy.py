@@ -32,9 +32,7 @@ def get_entropy_color(entropy: float, max_entropy: float = 8.0) -> str:
     
     ratio = entropy / max_entropy
     
-    if ratio < 0.4:
-        return "red"
-    elif ratio < 0.7:
+    if ratio < 0.5:
         return "yellow"
     else:
         return "green"
