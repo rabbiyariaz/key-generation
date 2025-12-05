@@ -1,19 +1,22 @@
 // src/api/index.js (or wherever)
 import axios from 'axios'
 
+// Read env var (empty string if not provided)
 const raw = import.meta.env.VITE_API_URL ?? '';
-const cleanBase = raw.replace(/\/+$/, ''); // remove trailing slash(es)
-const API_PREFIX = '/api';
+
+// Remove ALL trailing slashes
+const cleanBase = raw.replace(/\/+$/, '');
+
+// Always append /api (backend lives there)
 const API_BASE = cleanBase
-  ? (cleanBase.endsWith(API_PREFIX) ? cleanBase : cleanBase + API_PREFIX)
-  : API_PREFIX;
-
-
+  ? `${cleanBase}/api`
+  : '/api'; // local dev fallback
 
 const api = axios.create({
   baseURL: API_BASE,
   headers: { 'Content-Type': 'application/json' },
-})
+});
+
 
 
 export const cfgApi = {
